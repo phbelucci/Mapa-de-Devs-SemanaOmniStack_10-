@@ -1,7 +1,6 @@
 const Dev = require('../models/Dev')
 const parseStringAsArray = require('../utils/parseStringAsArray')
 
-
 module.exports = {
 
     async index(request,response) {
@@ -27,5 +26,16 @@ module.exports = {
         })
 
         return response.json({devs})
+    },
+    async destroy(request,response){
+
+        const {name} = request.query
+        console.log(name)
+
+        const dev = await Dev.deleteOne({
+            github_username  : {$equals : name}
+        })
+
+        return response.json({message : `O usuario ${name} foi excluido!`})
     }
 }
