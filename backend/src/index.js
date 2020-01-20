@@ -4,6 +4,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 
 const routes = require('../src/routes')
+
+const cors = require('cors')
 //criando aplicaçao
 const app = express()
 
@@ -15,6 +17,9 @@ mongoose.connect('mongodb+srv://omnistack:omnistack@cluster0-lhxuq.mongodb.net/w
 //valido para todas as rotas da aplicaça
 //informa para o express que sera utilizado o JSON 
 
+
+//cors vai evitar o bloqueio do acesso a partir de outras portas
+app.use(cors()) //posso colocar o endereço que quero { origin : 'https://localhost:3000'}
 //express.json precisa vir antes das rotas
 app.use(express.json())
 app.use(routes)
